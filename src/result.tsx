@@ -38,7 +38,13 @@ export function HarvestResult({ isOpen, onClose, items, title = "收获成功！
                   transition={{ delay: i * 0.2, type: "spring" }}
                   className="relative bg-orange-50 border-4 border-orange-300 rounded-2xl p-4 flex flex-col items-center w-32 shadow-lg"
                 >
-                  <div className="text-6xl drop-shadow-md mb-2">{item.card.emoji}</div>
+                  <div className="w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                    {item.card.image ? (
+                      <img src={item.card.image} alt={item.card.name} className="max-w-full max-h-full object-contain drop-shadow-md" />
+                    ) : (
+                      <span className="text-6xl drop-shadow-md">{item.card.emoji}</span>
+                    )}
+                  </div>
                   <div className="text-lg font-bold text-orange-800 text-center">{item.card.name}</div>
                   <div className="absolute -top-4 -right-4 bg-red-500 text-white text-xl font-bold rounded-full w-10 h-10 flex items-center justify-center border-4 border-white shadow-md">
                     x{item.quantity}
