@@ -243,7 +243,7 @@ export default function Farm({ day, setDay, hasDrawnToday, setHasDrawnToday, han
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: 'url("https://image.pollinations.ai/prompt/cute%20pixel%20art%20farm%20map%20with%20a%20small%20house%20on%20the%20left%20and%20a%20pond%20on%20the%20right,%20top%20down%20view,%20stardew%20valley%20style,%20warm%20colors,%20no%20characters?width=1920&height=1080&nologo=true")',
+          backgroundImage: 'url("/backgrounds/farm.png")',
           imageRendering: 'pixelated'
         }}
       />
