@@ -150,7 +150,7 @@ export default function Izakaya({ day, setDay, hand, setHand, money, setMoney, o
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{ 
-            backgroundImage: 'url("https://image.pollinations.ai/prompt/cute%20pixel%20art%20japanese%20izakaya%20interior,%20warm%20lighting,%20wooden%20floor,%20top%20down%20view?width=1920&height=1080&nologo=true")',
+            backgroundImage: 'url("/backgrounds/izakaya.png")',
             imageRendering: 'pixelated'
           }}
         />
@@ -309,5 +309,3 @@ export default function Izakaya({ day, setDay, hand, setHand, money, setMoney, o
     </div>
   );
 }
-
-                                                  
