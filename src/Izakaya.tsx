@@ -186,7 +186,11 @@ export default function Izakaya({ day, setDay, hand, setHand, money, setMoney, o
                       '又没座了...'
                     ) : (
                       <>
-                        点单: {CARD_DICT[customer.order].emoji}
+                        点单: {CARD_DICT[customer.order].image ? (
+                          <img src={CARD_DICT[customer.order].image} alt={CARD_DICT[customer.order].name} className="inline-block w-6 h-6 object-contain align-middle" />
+                        ) : (
+                          CARD_DICT[customer.order].emoji
+                        )}
                       </>
                     )}
                     {/* Bubble tail */}
@@ -234,12 +238,24 @@ export default function Izakaya({ day, setDay, hand, setHand, money, setMoney, o
                   <div key={idx} className="flex items-center justify-between bg-orange-50 p-2 rounded-xl border-2 border-orange-200">
                     <div className="flex gap-1">
                       {recipe.ingredients.map((ing, i) => (
-                        <span key={i} className="text-xl" title={CARD_DICT[ing].name}>{CARD_DICT[ing].emoji}</span>
+                        <span key={i} className="text-xl inline-flex items-center" title={CARD_DICT[ing].name}>
+                          {CARD_DICT[ing].image ? (
+                            <img src={CARD_DICT[ing].image} alt={CARD_DICT[ing].name} className="w-6 h-6 object-contain" />
+                          ) : (
+                            CARD_DICT[ing].emoji
+                          )}
+                        </span>
                       ))}
                     </div>
                     <span className="text-gray-400 font-bold">➔</span>
                     <div className="flex items-center gap-1">
-                      <span className="text-2xl" title={CARD_DICT[recipe.result].name}>{CARD_DICT[recipe.result].emoji}</span>
+                      <span className="text-2xl inline-flex items-center" title={CARD_DICT[recipe.result].name}>
+                        {CARD_DICT[recipe.result].image ? (
+                          <img src={CARD_DICT[recipe.result].image} alt={CARD_DICT[recipe.result].name} className="w-8 h-8 object-contain" />
+                        ) : (
+                          CARD_DICT[recipe.result].emoji
+                        )}
+                      </span>
                       <span className="text-sm font-bold text-orange-800">{CARD_DICT[recipe.result].name}</span>
                       <span className="text-sm font-bold text-yellow-600">({CARD_DICT[recipe.result].price}💰)</span>
                     </div>
@@ -293,3 +309,5 @@ export default function Izakaya({ day, setDay, hand, setHand, money, setMoney, o
     </div>
   );
 }
+
+                                                  
