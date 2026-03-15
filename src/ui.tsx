@@ -6,9 +6,10 @@ interface SidebarProps {
   onDrawCards: () => void;
   onNextDay: () => void;
   mode?: 'farm' | 'izakaya';
+  onOpenShop?: () => void;
 }
 
-export function Sidebar({ hasDrawnToday, onDrawCards, onNextDay, mode = 'farm' }: SidebarProps) {
+export function Sidebar({ hasDrawnToday, onDrawCards, onNextDay, mode = 'farm', onOpenShop }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -24,7 +25,7 @@ export function Sidebar({ hasDrawnToday, onDrawCards, onNextDay, mode = 'farm' }
         </span>
       </button>
 
-      {/* Sidebar Panel */}
+      {/* Right Sidebar - 商店/任务/背包 */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -35,10 +36,25 @@ export function Sidebar({ hasDrawnToday, onDrawCards, onNextDay, mode = 'farm' }
             className="absolute right-0 top-0 bottom-0 w-72 bg-[#f4e4bc] border-l-8 border-[#d4b483] z-40 shadow-[-8px_0px_0px_0px_rgba(0,0,0,0.15)] flex flex-col p-6 pointer-events-auto"
             style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }}
           >
-            <h2 className="text-3xl font-bold text-yellow-900 mb-8 border-b-4 border-[#d4b483] pb-4 text-center">菜单</h2>
+            <h2 className="text-3xl font-bold text-yellow-900 mb-6 border-b-4 border-[#d4b483] pb-4 text-center">菜单</h2>
             
-            <div className="flex flex-col gap-6">
-              {/* Draw Card Button */}
+            <div className="flex flex-col gap-4">
+              {mode === 'farm' && (
+                <>
+                  <button 
+                    onClick={() => { onOpenShop?.(); setIsOpen(false); }}
+                    className="border-4 border-orange-400 px-6 py-3 rounded-2xl bg-orange-100 hover:bg-orange-200 text-orange-800 text-xl font-bold flex items-center justify-center gap-2 shadow-sm"
+                  >
+                    <span>🏪</span> 商店
+                  </button>
+                  <button className="border-4 border-amber-400 px-6 py-3 rounded-2xl bg-amber-100 hover:bg-amber-200 text-amber-800 text-xl font-bold flex items-center justify-center gap-2 shadow-sm opacity-70">
+                    <span>📜</span> 任务
+                  </button>
+                  <button className="border-4 border-blue-400 px-6 py-3 rounded-2xl bg-blue-100 hover:bg-blue-200 text-blue-800 text-xl font-bold flex items-center justify-center gap-2 shadow-sm opacity-70">
+                    <span>🎒</span> 背包
+                  </button>
+                </>
+              )}
               <button 
                 onClick={onDrawCards}
                 disabled={hasDrawnToday}
@@ -50,8 +66,6 @@ export function Sidebar({ hasDrawnToday, onDrawCards, onNextDay, mode = 'farm' }
               >
                 {hasDrawnToday ? '今日已抽' : '抽卡 🎴'}
               </button>
-
-              {/* Next Day Button */}
               <button 
                 onClick={onNextDay}
                 className="bg-green-400 border-4 border-green-600 px-6 py-4 rounded-2xl text-white text-2xl font-bold hover:bg-green-300 active:translate-y-1 shadow-[4px_4px_0px_0px_#16a34a] transition-all flex items-center justify-center"
