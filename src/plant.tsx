@@ -272,7 +272,7 @@ export default function Farm({ day, setDay, hasDrawnToday, setHasDrawnToday, han
                   {mc.age !== undefined && mc.age >= 4 ? '✨成熟' : `成长:${mc.age}/4`}
                 </div>
               )}
-              {mc.type === 'sheep' && mc.daysSinceFed! > 0 && (
+              {(mc.type === 'sheep' || mc.type === 'chicken') && mc.daysSinceFed! > 0 && (
                 <div className="absolute -top-3 -right-3 text-xl animate-bounce bg-white rounded-full p-1 shadow-md z-10" title="需要杂草！">🌿</div>
               )}
               
@@ -302,20 +302,61 @@ export default function Farm({ day, setDay, hasDrawnToday, setHasDrawnToday, han
               {mc.type === 'seaweed_seed' && mc.daysSinceWatered! > 0 && mc.age !== undefined && mc.age < 2 && (
                 <div className="absolute -top-3 -right-3 text-xl animate-bounce bg-white rounded-full p-1 shadow-md z-10" title="需要浇水！">💧</div>
               )}
+
+              {mc.type === 'potato_seed' && (
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white border-2 border-green-400 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap shadow-sm z-10">
+                  {mc.age !== undefined && mc.age >= 3 ? '✨成熟' : `成长:${mc.age}/3`}
+                </div>
+              )}
+              {mc.type === 'potato_seed' && mc.daysSinceWatered! > 0 && mc.age !== undefined && mc.age < 3 && (
+                <div className="absolute -top-3 -right-3 text-xl animate-bounce bg-white rounded-full p-1 shadow-md z-10" title="需要浇水！">💧</div>
+              )}
+
+              {mc.type === 'radish_seed' && (
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white border-2 border-green-400 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap shadow-sm z-10">
+                  {mc.age !== undefined && mc.age >= 2 ? '✨成熟' : `成长:${mc.age}/2`}
+                </div>
+              )}
+              {mc.type === 'radish_seed' && mc.daysSinceWatered! > 0 && mc.age !== undefined && mc.age < 2 && (
+                <div className="absolute -top-3 -right-3 text-xl animate-bounce bg-white rounded-full p-1 shadow-md z-10" title="需要浇水！">💧</div>
+              )}
             </PlayingCard>
           </div>
         ))}
+      </div>
+
+      {/* Left Sidebar - 木屋/农田/牧场 */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2 p-2 bg-[#f4e4bc]/95 border-4 border-r-0 border-[#d4b483] rounded-r-2xl shadow-lg">
+        <button className="p-3 rounded-xl bg-orange-100 border-2 border-orange-300 hover:bg-orange-200 transition-colors" title="木屋">
+          <span className="text-2xl">🏠</span>
+          <div className="text-xs font-bold text-orange-800">木屋</div>
+        </button>
+        <button className="p-3 rounded-xl bg-green-200 border-2 border-green-400 hover:bg-green-300 transition-colors" title="农田">
+          <span className="text-2xl">🌾</span>
+          <div className="text-xs font-bold text-green-800">农田</div>
+        </button>
+        <button className="p-3 rounded-xl bg-orange-100 border-2 border-orange-300 hover:bg-orange-200 transition-colors" title="牧场">
+          <span className="text-2xl">🐑</span>
+          <div className="text-xs font-bold text-orange-800">牧场</div>
+        </button>
       </div>
 
       {/* Header overlay */}
       <header className="absolute top-4 left-4 right-4 flex justify-between items-start z-20 pointer-events-none">
         <div className="flex flex-col gap-4 pointer-events-auto">
           <div className="bg-white/90 backdrop-blur border-4 border-green-400 px-6 py-2 rounded-2xl shadow-[4px_4px_0px_0px_#4ade80]">
-            <span className="text-3xl text-green-700 font-bold">农场 - 第 {day} 天</span>
+            <span className="text-3xl text-green-700 font-bold">牧场 · 第 {day} 天</span>
           </div>
         </div>
         
-        <div className="flex gap-4 items-start pointer-events-auto">
+        <div className="flex gap-4 items-center pointer-events-auto">
+          <div className="bg-white/90 backdrop-blur border-4 border-yellow-400 px-4 py-2 rounded-2xl">
+            <span className="text-xl font-bold text-yellow-700">💰 {money}</span>
+          </div>
+          <div className="bg-white/90 backdrop-blur border-4 border-amber-400 px-4 py-2 rounded-2xl">
+            <span className="text-xl font-bold text-amber-700">⚡ 8/10</span>
+          </div>
+          <button className="p-2 rounded-xl bg-white/90 border-2 border-gray-300 hover:bg-gray-100" title="设置">⚙️</button>
           {/* Equipment Slot */}
           <div 
             className="bg-blue-200/90 backdrop-blur border-4 border-blue-400 rounded-2xl p-2 shadow-[4px_4px_0px_0px_#60a5fa] flex gap-2 h-20 items-center min-w-[100px] justify-center"
@@ -341,8 +382,9 @@ export default function Farm({ day, setDay, hasDrawnToday, setHasDrawnToday, han
         </div>
       </header>
 
-      {/* Hand of Cards */}
+      {/* Hand of Cards - 底部卡牌栏 */}
       <div className="absolute bottom-0 left-0 right-0 h-48 flex justify-center items-end pb-4 z-40 pointer-events-none">
+        <button className="absolute left-4 bottom-24 z-50 w-10 h-10 rounded-full bg-green-500 text-white font-bold text-xl flex items-center justify-center hover:bg-green-600 shadow-lg pointer-events-auto">‹</button>
         <div className="flex justify-center items-end pointer-events-auto px-4 w-auto py-2">
           <AnimatePresence>
             {hand.map((card, index) => (
@@ -357,6 +399,7 @@ export default function Farm({ day, setDay, hasDrawnToday, setHasDrawnToday, han
             ))}
           </AnimatePresence>
         </div>
+        <button className="absolute right-4 bottom-24 z-50 w-10 h-10 rounded-full bg-green-500 text-white font-bold text-xl flex items-center justify-center hover:bg-green-600 shadow-lg pointer-events-auto">+</button>
       </div>
 
       {/* Naming Sheep Modal */}
@@ -522,7 +565,7 @@ export default function Farm({ day, setDay, hasDrawnToday, setHasDrawnToday, han
       
       </div>
 
-      <Sidebar hasDrawnToday={hasDrawnToday} onDrawCards={drawCards} onNextDay={onGoToIzakaya} />
+      <Sidebar hasDrawnToday={hasDrawnToday} onDrawCards={drawCards} onNextDay={onGoToIzakaya} onOpenShop={() => setShowShop(true)} />
     </div>
   );
 }
