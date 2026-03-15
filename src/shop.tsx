@@ -71,7 +71,13 @@ export function Shop({ money, setMoney, hand, setHand, onClose, showAlert }: Sho
         <div className="grid grid-cols-2 gap-4 w-full overflow-y-auto pr-2">
           {SHOP_ITEMS.map((item, idx) => (
             <div key={idx} className="bg-orange-50 border-4 border-orange-200 rounded-2xl p-4 flex flex-col items-center gap-3 hover:bg-orange-100 transition-colors">
-              <div className="text-5xl">{CARD_DICT[item.type].emoji}</div>
+              <div className="w-16 h-16 flex items-center justify-center mx-auto">
+                {CARD_DICT[item.type].image ? (
+                  <img src={CARD_DICT[item.type].image} alt={CARD_DICT[item.type].name} className="max-w-full max-h-full object-contain" />
+                ) : (
+                  <span className="text-5xl">{CARD_DICT[item.type].emoji}</span>
+                )}
+              </div>
               <div className="text-xl font-bold text-orange-900">{CARD_DICT[item.type].name}</div>
               <button 
                 className="w-full py-2 bg-yellow-400 rounded-xl font-bold text-yellow-900 hover:bg-yellow-500 shadow-[2px_2px_0px_0px_#ca8a04] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-1"
@@ -93,3 +99,4 @@ export function Shop({ money, setMoney, hand, setHand, onClose, showAlert }: Sho
     </div>
   );
 }
+
