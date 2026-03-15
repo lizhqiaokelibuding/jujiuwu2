@@ -17,6 +17,9 @@ export default function App() {
     { id: 'c4', ...CARD_DICT.fishing_rod, quantity: 1 },
     { id: 'c5', ...CARD_DICT.watering_can, quantity: 1 },
     { id: 'c6', ...CARD_DICT.seed, quantity: 3 },
+    { id: 'c7', ...CARD_DICT.wheat, quantity: 2 },
+    { id: 'c8', ...CARD_DICT.cabbage, quantity: 2 },
+    { id: 'c9', ...CARD_DICT.chicken, quantity: 1 },
   ]);
   const [equippedTool, setEquippedTool] = useState<CardData | null>(null);
   const [mapCards, setMapCards] = useState<MapCard[]>([
@@ -127,3 +130,4 @@ export default function App() {
     </div>
   );
 }
+
