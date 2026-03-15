@@ -204,7 +204,13 @@ export function FishingGame({ onSuccess, onFail }: FishingGameProps) {
               animate={{ scale: 1, y: 0 }}
               className="flex flex-col items-center"
             >
-              <div className="text-6xl mb-2 drop-shadow-lg">{CARD_DICT[targetFish.type].emoji}</div>
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-2">
+                {CARD_DICT[targetFish.type].image ? (
+                  <img src={CARD_DICT[targetFish.type].image} alt={CARD_DICT[targetFish.type].name} className="max-w-full max-h-full object-contain drop-shadow-lg" />
+                ) : (
+                  <span className="text-6xl drop-shadow-lg">{CARD_DICT[targetFish.type].emoji}</span>
+                )}
+              </div>
               <div className="text-xl font-bold text-yellow-300">{CARD_DICT[targetFish.type].name}</div>
             </motion.div>
           )}
